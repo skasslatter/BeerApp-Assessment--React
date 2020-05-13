@@ -10,18 +10,18 @@ interface State {
 }
 
 
-export class Beers extends React.Component<Props, State> {
+export class Breweries extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       beers: [],
     };
-  this.getAllBeers = this.getAllBeers.bind(this)
+  this.getAllBreweries = this.getAllBreweries.bind(this)
 }
 
-  getAllBeers() {
+getAllBreweries() {
     Axios
-      .get("https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb")
+      .get("https://sandbox-api.brewerydb.com/v2/breweries/?key=659d5c6b8f3d2447f090119e48202fdb")
     // Axios({
     //   method: "GET",
     //   url: "https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb",
@@ -40,7 +40,7 @@ export class Beers extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.getAllBeers();
+    this.getAllBreweries();
   }
 
   render() {
@@ -50,16 +50,20 @@ export class Beers extends React.Component<Props, State> {
         <div className="hero-image">
           <div className="hero-text">
             <h1>All our beers</h1>
+            {/* <p>List</p> */}
             </div>
             </div>
             <div className="container">
               {this.state.beers.map((beer) => (
                 <Link
-                  key={beer.id}
+                  key={beer.ids}
                   to={`/beers/${beer.id}`}
                   className="beer-detail-link"
                 >
                   <div className="row beer-list">
+                    {/* <div className="col-5">
+                      <img src={beer.image_url} alt="Beer Bottle" />
+                    </div> */}
                     <div className="col-7 beer-list_text">
                       <h2>{beer.name}</h2>
                       <h4>Year: {beer.year}</h4>
@@ -77,4 +81,9 @@ export class Beers extends React.Component<Props, State> {
   }
 }
 
-export default Beers;
+export default Breweries;
+
+// list beer brands per country
+// provide a search field by name
+// filter/group them by country
+// filter/group them by type

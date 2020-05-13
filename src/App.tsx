@@ -6,6 +6,9 @@ import { Switch, Route } from "react-router-dom";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
 import Beers from "./pages/Beers";
+import BeerDetail from "./pages/BeerDetail";
+
+import Breweries from "./pages/Breweries";
 
 
 
@@ -16,6 +19,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Homepage}></Route>
           <Route exact path="/beers" component={Beers}></Route>
+          <Route exact path="/breweries" component={Breweries}></Route>
+          <Route exact path="/beers/:id" component={BeerDetail}></Route>
         </Switch>
       </header>
       <Footer />
