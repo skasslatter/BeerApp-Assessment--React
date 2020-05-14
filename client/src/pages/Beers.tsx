@@ -19,18 +19,6 @@ export class Beers extends React.Component<Props, State> {
   this.getAllBeers = this.getAllBeers.bind(this)
 }
 
-  // getAllBeers() {
-  //   Axios
-  //     .get("https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb")
-  //     .then((response) => {
-  //       console.log("all beers response: ", response);
-  //       this.setState({ beers: response.data.data });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-
   getAllBeers() {
     Axios
     .get("http://localhost:3000/beers")
@@ -68,14 +56,11 @@ export class Beers extends React.Component<Props, State> {
                       <h2>{beer.name}</h2>
                       <h4>Year: {beer.year}</h4>
                       <p>id: {beer.id}</p>
-
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
-          
-        
       </div>
     );
   }

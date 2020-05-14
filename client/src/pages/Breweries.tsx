@@ -80,33 +80,32 @@ export class Breweries extends React.Component<Props, State> {
   }
 
   getAllBreweries() {
-    console.log("h1");
-    fetch(
-      "https://sandbox-api.brewerydb.com/v2/breweries/?key=659d5c6b8f3d2447f090119e48202fdb&withLocations=Y"
-    )
-      .then(function (response) {
-        if (response.status !== 200) {
-          console.log(
-            "Looks like there was a problem. Status Code: " + response.status
-          );
-          return;
-        }
+    Axios
+    .get("http://localhost:3000/breweries")
+      // .then(function (response) {
+      //   if (response.status !== 200) {
+      //     console.log(
+      //       "Looks like there was a problem. Status Code: " + response.status
+      //     );
+      //     return;
+      //   }
 
-        // Examine the text in the response
-        response.json().then(function (data) {
-          console.log("yes", data);
-        });
-      })
-      .catch(function (err) {
-        console.log("Fetch Error :-S", err);
-      });
+      //   // Examine the text in the response
+      //   response.json().then(function (data) {
+      //     console.log("yes", data);
+      //   });
+      // })
+      // .catch(function (err) {
+      //   console.log("Fetch Error :-S", err);
+      // });
 
-    Axios.get(
-      "https://sandbox-api.brewerydb.com/v2/breweries/?key=659d5c6b8f3d2447f090119e48202fdb&withLocations=Y"
-    )
+    // Axios
+    // .get(
+    //   "https://sandbox-api.brewerydb.com/v2/breweries/?key=659d5c6b8f3d2447f090119e48202fdb&withLocations=Y"
+    // )
       .then((response) => {
         console.log("all breweries response: ", response);
-        const breweries: Array<Brewery> = response.data.data;
+        const breweries: Array<Brewery> = response.data.beers;
         const uniqueCountryNames = getCountryNames(breweries);
 
         this.setState({
