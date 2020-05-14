@@ -2,6 +2,8 @@ import React from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import SearchByName from "../components/SearchByName";
+import SearchByCountry from "../components/SearchByCountry";
 
 import "../styling/default.scss";
 
@@ -9,8 +11,9 @@ interface Props {}
 interface State {
   breweries: Array<Brewery>;
   countries: Array<string>;
+  shownBreweries: Array<Brewery>;
   selectedCountry?: string;
-  searchName?: string;
+  searchType?: string;
 }
 interface Brewery {
   id: string;
@@ -24,6 +27,7 @@ interface Country {
   displayName: string;
 }
 
+///functions
 function getCountryNames(breweries: Array<Brewery>) {
   const locations = breweries
     .filter((brewery) => {
@@ -42,7 +46,7 @@ function getCountryNames(breweries: Array<Brewery>) {
 
 function filterBreweriesByCountry(
   breweries: Array<Brewery>,
-  countryName: String
+  countryName: string
 ) {
   if (!countryName) {
     return breweries;
@@ -69,40 +73,25 @@ function filterBreweriesByName(breweries: Array<Brewery>, name: string) {
   return filteredBreweries;
 }
 
+
+//component
 export class Breweries extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
       breweries: [],
       countries: [],
+      shownBreweries: [],
+      searchType: "name",
     };
     this.getAllBreweries = this.getAllBreweries.bind(this);
+    this.handleSearchType = this.handleSearchType.bind(this);
+    this.handleSearchByName = this.handleSearchByName.bind(this);
+    this.handleSearchByCountry = this.handleSearchByCountry.bind(this);
   }
 
   getAllBreweries() {
-    Axios
-    .get("http://localhost:3000/breweries")
-      // .then(function (response) {
-      //   if (response.status !== 200) {
-      //     console.log(
-      //       "Looks like there was a problem. Status Code: " + response.status
-      //     );
-      //     return;
-      //   }
-
-      //   // Examine the text in the response
-      //   response.json().then(function (data) {
-      //     console.log("yes", data);
-      //   });
-      // })
-      // .catch(function (err) {
-      //   console.log("Fetch Error :-S", err);
-      // });
-
-    // Axios
-    // .get(
-    //   "https://sandbox-api.brewerydb.com/v2/breweries/?key=659d5c6b8f3d2447f090119e48202fdb&withLocations=Y"
-    // )
+    Axios.get("http://localhost:3000/breweries")
       .then((response) => {
         console.log("all breweries response: ", response);
         const breweries: Array<Brewery> = response.data.beers;
@@ -110,6 +99,7 @@ export class Breweries extends React.Component<Props, State> {
 
         this.setState({
           breweries,
+          shownBreweries: breweries,
           countries: uniqueCountryNames,
         });
       })
@@ -122,7 +112,35 @@ export class Breweries extends React.Component<Props, State> {
     this.getAllBreweries();
   }
 
+  //handles the drop down search menu
+  handleSearchType(search: any) {
+    let selectedSearch = search.target.value;
+    this.setState({ searchType: selectedSearch });
+  }
+  handleSearchByName(name: string): void {
+    const filteredBreweries = filterBreweriesByName(this.state.breweries, name);
+    this.setState({
+      shownBreweries: filteredBreweries
+    })
+  }
+  handleSearchByCountry(name: string): void {
+    const filteredBreweries = filterBreweriesByCountry(this.state.breweries, name);
+    this.setState({
+      shownBreweries: filteredBreweries
+    })
+  }
+
   render() {
+    let searchComponent = <div></div>;
+    if (this.state.searchType === "name") {
+      searchComponent = <SearchByName handleSearch={this.handleSearchByName} />;
+    } 
+    else if (this.state.searchType === "country") {
+      searchComponent = (
+        <SearchByCountry handleSearch={this.handleSearchByCountry} />
+      );
+    }
+
     return (
       <div>
         <div className="hero-image">
@@ -131,7 +149,23 @@ export class Breweries extends React.Component<Props, State> {
           </div>
         </div>
         <div className="container">
-          {this.state.breweries.map((brewery) => (
+          <div className="search-header">
+            <div>
+              <h4 id="search-title">I want to </h4>
+              <select
+                name="search"
+                className="search-select"
+                onChange={(event) => this.handleSearchType(event)}
+              >
+                <option value="name" selected>
+                  search by Name
+                </option>
+                <option value="country">search by Country</option>
+              </select>
+            </div>
+            {searchComponent}
+          </div>
+          {this.state.shownBreweries.map((brewery) => (
             <Link
               key={brewery.id}
               to={`/beers/${brewery.id}`}
