@@ -9,9 +9,10 @@ let usersRouter = require('./routes/users');
 
 let app = express();
 let cors = require('cors');
+require('dotenv').config()
 
 app.use(cors({
-  origin: ['https://localhost:3000', 'http://localhost:3000'],
+  origin: ['https://localhost:3001', 'http://localhost:3001'],
   credentials: true
 }));
 
@@ -25,10 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
-app.use("/api", require("./routes/api"));
+app.use("/", require("./routes/api"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
