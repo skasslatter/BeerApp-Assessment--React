@@ -26,9 +26,7 @@ export class BeerDetail extends React.Component<Props, State> {
     )
       .then((response) => {
         console.log("one beer response: ", response.data.data);
-        let myJSON = JSON.stringify(response.data.data);
-        let myData = JSON.parse(myJSON);
-        this.setState({ beer: myData });
+        this.setState({ beer: response.data.data });
         console.log("STATE", this.state);
       })
       .catch((error) => {

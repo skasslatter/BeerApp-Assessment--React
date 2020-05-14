@@ -2,7 +2,7 @@ import React from 'react';
 // import './App.css';
 
 import { Switch, Route } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Homepage from "./pages/Homepage";
 import Beers from "./pages/Beers";
@@ -16,6 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <Navbar/>
         <Switch>
           <Route exact path="/" component={Homepage}></Route>
           <Route exact path="/beers" component={Beers}></Route>
