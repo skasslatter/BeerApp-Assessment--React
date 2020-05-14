@@ -19,25 +19,29 @@ export class Beers extends React.Component<Props, State> {
   this.getAllBeers = this.getAllBeers.bind(this)
 }
 
+  // getAllBeers() {
+  //   Axios
+  //     .get("https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb")
+  //     .then((response) => {
+  //       console.log("all beers response: ", response);
+  //       this.setState({ beers: response.data.data });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
+
   getAllBeers() {
     Axios
-      .get("https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb")
-    // Axios({
-    //   method: "GET",
-    //   url: "https://sandbox-api.brewerydb.com/v2/beers/?key=659d5c6b8f3d2447f090119e48202fdb",
-      
-    //   // withCredentials: true,
-    // headers: {'Access-Control-Allow-Origin': 'http://localhost:3000'}
-    
-    // })
-      .then((response) => {
-        console.log("all beers response: ", response);
-        this.setState({ beers: response.data.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+    .get("http://localhost:3000/beers")
+    .then((response) => {
+      console.log("all beers response: ", response);
+      this.setState({ beers: response.data.beers });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
   componentDidMount() {
     this.getAllBeers();
