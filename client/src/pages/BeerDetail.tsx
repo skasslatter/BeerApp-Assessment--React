@@ -33,14 +33,16 @@ export class BeerDetail extends React.Component<Props, State> {
   }
 
   render() {
+    // console.log(this.state.beer)
+    console.log('here', this.state.beer.style)
+
     return (
       <div>
         {!this.state.beer && <h1>Loading...</h1>}
         {this.state.beer && (
           <div>
             <h2>{this.state.beer.name}</h2>
-            {/* <p>Style: {this.state.beer.style.category.name}</p> */}
-            {/* <p>Style: {this.state.beer.style.description}</p> */}
+            <p>{this.state.beer.description}</p>
 
           </div>
         )}
