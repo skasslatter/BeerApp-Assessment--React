@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  handleSearch: (name: string) => void
+  handleSearch: (name: string) => void;
 }
 interface State {
   searchValue: string;

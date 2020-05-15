@@ -73,7 +73,6 @@ function filterBreweriesByName(breweries: Array<Brewery>, name: string) {
   return filteredBreweries;
 }
 
-
 //component
 export class Breweries extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -96,9 +95,8 @@ export class Breweries extends React.Component<Props, State> {
         console.log("all breweries response: ", response);
         const breweries: Array<Brewery> = response.data.beers;
         const uniqueCountryNames = getCountryNames(breweries);
-
         this.setState({
-          breweries,
+          breweries: breweries,
           shownBreweries: breweries,
           countries: uniqueCountryNames,
         });
@@ -107,37 +105,47 @@ export class Breweries extends React.Component<Props, State> {
         console.log("error2", error);
       });
   }
-
   componentDidMount() {
     this.getAllBreweries();
   }
 
   //handles the drop down search menu
   handleSearchType(search: any) {
+    this.setState({
+      shownBreweries: this.state.breweries,
+    })
     let selectedSearch = search.target.value;
     this.setState({ searchType: selectedSearch });
   }
   handleSearchByName(name: string): void {
+    this.setState({
+      shownBreweries: this.state.breweries,
+    })
     const filteredBreweries = filterBreweriesByName(this.state.breweries, name);
     this.setState({
-      shownBreweries: filteredBreweries
-    })
+      shownBreweries: filteredBreweries,
+    });
   }
   handleSearchByCountry(name: string): void {
-    const filteredBreweries = filterBreweriesByCountry(this.state.breweries, name);
+    const filteredBreweries = filterBreweriesByCountry(
+      this.state.breweries,
+      name,
+    );
     this.setState({
-      shownBreweries: filteredBreweries
-    })
+      shownBreweries: filteredBreweries,
+    });
   }
 
   render() {
     let searchComponent = <div></div>;
     if (this.state.searchType === "name") {
       searchComponent = <SearchByName handleSearch={this.handleSearchByName} />;
-    } 
-    else if (this.state.searchType === "country") {
+    } else if (this.state.searchType === "country") {
       searchComponent = (
-        <SearchByCountry handleSearch={this.handleSearchByCountry} />
+        <SearchByCountry
+          handleSearch={this.handleSearchByCountry}
+          countries={this.state.countries}
+        />
       );
     }
 
