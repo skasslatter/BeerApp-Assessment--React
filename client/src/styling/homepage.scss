@@ -1,10 +1,12 @@
-body, html {
+body,
+html {
   height: 100%;
 }
 
 .bg {
   /* The image used */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/headerBeer.jpeg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("/headerBeer.jpeg");
 
   /* Full height */
   height: 100vh;
@@ -25,4 +27,14 @@ body, html {
 
 .caption h1 {
   color: white;
+}
+
+.homepage-buttons {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.homepage-button {
+  margin: 2vh;
 }

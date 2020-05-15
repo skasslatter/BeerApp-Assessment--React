@@ -6,14 +6,17 @@ export class Homepage extends React.Component {
   render() {
     return (
       <div className="bg">
-          <div className="caption">
-            <h1>Welcome</h1>
-            <Link to="/beers" className="main-section-link">
-          <button className="btn btn-success">
-            Check out all our beers
-          </button>
-        </Link>
+        <div className="caption">
+          <h1>Welcome</h1>
+          <div className="homepage-buttons">
+          {/* <Link to="/beers" className="homepage-button">
+            <button className="btn btn-warning">Check out our beers</button>
+          </Link> */}
+          <Link to="/breweries">
+            <button className="btn btn-warning">Check out our breweries</button>
+          </Link>
           </div>
+        </div>
       </div>
     );
   }

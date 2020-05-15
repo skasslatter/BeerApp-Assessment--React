@@ -173,11 +173,11 @@ export class Breweries extends React.Component<Props, State> {
             </div>
             {searchComponent}
           </div>
+          <p>Click on a brewery to see which beers they produce</p>
           {this.state.shownBreweries.map((brewery) => (
             <Link
               key={brewery.id}
-              to={`/beers/${brewery.id}`}
-              className="beer-detail-link"
+              to={`/breweries/${brewery.id}`}
             >
               <div className="row">
                 <div className="col-7">
@@ -194,7 +194,3 @@ export class Breweries extends React.Component<Props, State> {
 
 export default Breweries;
 
-// list beer brands per country
-// provide a search field by name
-// filter/group them by country
-// filter/group them by type

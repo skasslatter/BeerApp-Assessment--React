@@ -9,6 +9,7 @@ import Beers from "./pages/Beers";
 import BeerDetail from "./pages/BeerDetail";
 
 import Breweries from "./pages/Breweries";
+import BreweryDetail from "./pages/BreweryDetail";
 
 
 
@@ -21,6 +22,7 @@ function App() {
           <Route exact path="/" component={Homepage}></Route>
           <Route exact path="/beers" component={Beers}></Route>
           <Route exact path="/breweries" component={Breweries}></Route>
+          <Route exact path="/breweries/:id" component={BreweryDetail}></Route>
           <Route exact path="/beers/:id" component={BeerDetail}></Route>
         </Switch>
       </header>
