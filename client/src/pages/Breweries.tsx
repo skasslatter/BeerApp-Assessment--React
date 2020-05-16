@@ -19,6 +19,7 @@ interface Brewery {
   id: string;
   name: string;
   locations: Array<Location>;
+  description: string;
 }
 interface Location {
   country: Country;
@@ -113,14 +114,14 @@ export class Breweries extends React.Component<Props, State> {
   handleSearchType(search: any) {
     this.setState({
       shownBreweries: this.state.breweries,
-    })
+    });
     let selectedSearch = search.target.value;
     this.setState({ searchType: selectedSearch });
   }
   handleSearchByName(name: string): void {
     this.setState({
       shownBreweries: this.state.breweries,
-    })
+    });
     const filteredBreweries = filterBreweriesByName(this.state.breweries, name);
     this.setState({
       shownBreweries: filteredBreweries,
@@ -129,7 +130,7 @@ export class Breweries extends React.Component<Props, State> {
   handleSearchByCountry(name: string): void {
     const filteredBreweries = filterBreweriesByCountry(
       this.state.breweries,
-      name,
+      name
     );
     this.setState({
       shownBreweries: filteredBreweries,
@@ -139,7 +140,12 @@ export class Breweries extends React.Component<Props, State> {
   render() {
     let searchComponent = <div></div>;
     if (this.state.searchType === "name") {
-      searchComponent = <SearchByName handleSearch={this.handleSearchByName} />;
+      searchComponent = (
+        <SearchByName
+          handleSearch={this.handleSearchByName}
+          placeholder="brewery name"
+        />
+      );
     } else if (this.state.searchType === "country") {
       searchComponent = (
         <SearchByCountry
@@ -148,7 +154,6 @@ export class Breweries extends React.Component<Props, State> {
         />
       );
     }
-
     return (
       <div>
         <div className="hero-image">
@@ -175,16 +180,16 @@ export class Breweries extends React.Component<Props, State> {
           </div>
           <p>Click on a brewery to see which beers they produce</p>
           {this.state.shownBreweries.map((brewery) => (
-            <Link
-              key={brewery.id}
-              to={`/breweries/${brewery.id}`}
-            >
+            <div key={brewery.id}>
               <div className="row">
-                <div className="col-7">
-                  <h2>{brewery.name}</h2>
+                <div className="col-12">
+                  <Link to={`/breweries/${brewery.id}`}>
+                    <h5>{brewery.name}</h5>
+                  </Link>
+                  <p>{brewery.description}</p>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
@@ -193,4 +198,3 @@ export class Breweries extends React.Component<Props, State> {
 }
 
 export default Breweries;
-

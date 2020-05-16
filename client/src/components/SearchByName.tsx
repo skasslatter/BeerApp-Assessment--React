@@ -2,6 +2,7 @@ import React from "react";
 
 interface Props {
   handleSearch: (name: string) => void;
+  placeholder: string
 }
 interface State {
   searchValue: string;
@@ -27,7 +28,7 @@ class SearchByName extends React.Component<Props, State> {
       <div>
         <input
           className="search-name"
-          placeholder="Brewery name..."
+          placeholder={this.props.placeholder}
           type="text"
           name="text"
           onChange={(event) => this.handleOnChange(event)}
