@@ -40,23 +40,21 @@ function getBeerType(beers: Array<Beer>) {
   return uniqueBeerTypes;
 }
 
-function filterBeersByType(
-  beers: Array<Beer>,
-  name: string
-  ) {
+function filterBeersByType(beers: Array<Beer>, name: string) {
   if (!name) {
     return beers;
   }
   const filteredBeers = beers
     .filter((beer) => {
-      return beer.style.shortName !== null && beer.style.shortName !== undefined;
+      return (
+        beer.style.shortName !== null && beer.style.shortName !== undefined
+      );
     })
-   .filter((beer) => {
+    .filter((beer) => {
       let typeName = beer.style.shortName;
       return typeName === name;
-      // return validTypes.length > 0;
     });
-    console.log("filteredBeers", filteredBeers)
+  console.log("filteredBeers", filteredBeers);
   return filteredBeers;
 }
 
@@ -110,16 +108,13 @@ export class BreweryDetail extends React.Component<Props, State> {
 
   //handles the drop down search menu
   handleSearchType(search: any) {
-    this.setState({
-      shownBeers: this.state.beers,
-    });
     let selectedSearch = search.target.value;
-    this.setState({ searchType: selectedSearch });
+    this.setState({ 
+      shownBeers: this.state.beers,
+      searchType: selectedSearch
+     });
   }
   handleSearchByName(name: string): void {
-    this.setState({
-      shownBeers: this.state.beers,
-    });
     const filteredBeers = filterBeersByName(this.state.beers, name);
     this.setState({
       shownBeers: filteredBeers,
@@ -154,10 +149,10 @@ export class BreweryDetail extends React.Component<Props, State> {
       <div>
         <div className="hero-image">
           <div className="hero-text">
-            <h1>All their beers</h1>
+            <h1>Their beers</h1>
           </div>
         </div>
-        {this.state.loading && <h1>Loading...</h1>}
+        {this.state.loading && <h1>Loading 🍻🍻🍻</h1>}
         {!this.state.beers && !this.state.loading && <h1>No beers found</h1>}
         {this.state.beers && !this.state.loading && (
           <div className="container">
@@ -183,9 +178,14 @@ export class BreweryDetail extends React.Component<Props, State> {
               {this.state.shownBeers.map((beer: any) => (
                 <div className="col-sm-12" key={beer.id}>
                   {/* <Link  to={`/beers/${beer.id}`} > */}
-                  <div>
-                    <h5>{beer.name}</h5>
+                  <div className="list-item">
+                    <h4>{beer.name}</h4>
                     <p>Type: {beer.style.name}</p>
+                    {beer.labels && (
+                      <div className="beer-img">
+                        <img src={beer.labels.medium} />
+                      </div>
+                    )}
                   </div>
                   {/* </Link> */}
                 </div>

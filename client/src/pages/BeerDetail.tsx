@@ -41,7 +41,7 @@ export class BeerDetail extends React.Component<Props, State> {
         {!this.state.beer && <h1>Loading...</h1>}
         {this.state.beer && (
           <div>
-            <h2>{this.state.beer.name}</h2>
+            <h5>{this.state.beer.name}</h5>
             <p>{this.state.beer.description}</p>
 
           </div>

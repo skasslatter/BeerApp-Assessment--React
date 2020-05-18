@@ -1,18 +1,23 @@
-
-.search {display: flex;
-    justify-content: center;
-    margin-top: 4vh;
+.search {
+  display: flex;
+  justify-content: center;
+  margin-top: 4vh;
 }
 
 .search-name {
   width: 50%;
+  border-radius: 5px;
 }
 
 .search-component {
   text-align-last: center;
-  margin: 2vh;
+  margin: 2vh 0 4vh 0;
+  // margin-bottom: 4vh;
 }
 
-.search h4 {
-  margin: 1vh;
+.list-item {
+  border-top: 2px solid rgba(3,13,20,0.22);
+  padding-top: 2vh;
+  margin: 2vh 0;
+  text-align: center;
 }

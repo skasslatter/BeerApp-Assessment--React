@@ -14,6 +14,7 @@ interface State {
   shownBreweries: Array<Brewery>;
   selectedCountry?: string;
   searchType?: string;
+  loading: boolean;
 }
 interface Brewery {
   id: string;
@@ -83,6 +84,7 @@ export class Breweries extends React.Component<Props, State> {
       countries: [],
       shownBreweries: [],
       searchType: "name",
+      loading: true,
     };
     this.getAllBreweries = this.getAllBreweries.bind(this);
     this.handleSearchType = this.handleSearchType.bind(this);
@@ -100,6 +102,7 @@ export class Breweries extends React.Component<Props, State> {
           breweries: breweries,
           shownBreweries: breweries,
           countries: uniqueCountryNames,
+          loading: false,
         });
       })
       .catch((error) => {
@@ -112,16 +115,13 @@ export class Breweries extends React.Component<Props, State> {
 
   //handles the drop down search menu
   handleSearchType(search: any) {
+    let selectedSearch = search.target.value;
     this.setState({
+      searchType: selectedSearch,
       shownBreweries: this.state.breweries,
     });
-    let selectedSearch = search.target.value;
-    this.setState({ searchType: selectedSearch });
   }
   handleSearchByName(name: string): void {
-    this.setState({
-      shownBreweries: this.state.breweries,
-    });
     const filteredBreweries = filterBreweriesByName(this.state.breweries, name);
     this.setState({
       shownBreweries: filteredBreweries,
@@ -180,8 +180,9 @@ export class Breweries extends React.Component<Props, State> {
           {searchComponent}
 
           <h5>Click on a brewery to see which beers they produce</h5>
+          {this.state.loading && <h1>Loading 🍻🍻🍻</h1>}
           {this.state.shownBreweries.map((brewery) => (
-            <div key={brewery.id}>
+            <div key={brewery.id} className="list-item">
               <div className="row">
                 <div className="col-12">
                   <Link to={`/breweries/${brewery.id}`}>

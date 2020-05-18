@@ -53,7 +53,7 @@ export class Beers extends React.Component<Props, State> {
                 >
                   <div className="row beer-list">
                     <div className="col-7 beer-list_text">
-                      <h2>{beer.name}</h2>
+                      <h5>{beer.name}</h5>
                       <h4>Year: {beer.year}</h4>
                       <p>id: {beer.id}</p>
                     </div>
