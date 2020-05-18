@@ -1,10 +1,12 @@
 import React from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import _ from "lodash";
 import SearchByName from "../components/SearchByName";
+import SearchSelect from "../components/SearchSelect";
 
 import "../styling/default.scss";
+// import Beers from "./Beers";
 
 interface Props {
   match: any;
@@ -14,10 +16,48 @@ interface State {
   shownBeers: Array<Beer>;
   searchType: string;
   loading: boolean;
+  types: Array<string>;
 }
 interface Beer {
   id: string;
   name: string;
+  style: any;
+}
+
+function getBeerType(beers: Array<Beer>) {
+  const types = beers
+    .filter((beer) => {
+      return (
+        beer.style.shortName !== null && beer.style.shortName !== undefined
+      );
+    })
+    .map((beer) => {
+      return beer.style.shortName;
+    });
+  console.log("types", types);
+  const uniqueBeerTypes = _.uniq(types);
+  console.log("uniqueBeerTypes", uniqueBeerTypes);
+  return uniqueBeerTypes;
+}
+
+function filterBeersByType(
+  beers: Array<Beer>,
+  name: string
+  ) {
+  if (!name) {
+    return beers;
+  }
+  const filteredBeers = beers
+    .filter((beer) => {
+      return beer.style.shortName !== null && beer.style.shortName !== undefined;
+    })
+   .filter((beer) => {
+      let typeName = beer.style.shortName;
+      return typeName === name;
+      // return validTypes.length > 0;
+    });
+    console.log("filteredBeers", filteredBeers)
+  return filteredBeers;
 }
 
 function filterBeersByName(beers: Array<Beer>, name: string) {
@@ -37,22 +77,26 @@ export class BreweryDetail extends React.Component<Props, State> {
       shownBeers: [],
       searchType: "name",
       loading: true,
+      types: [],
     };
     this.getAllBreweries = this.getAllBreweries.bind(this);
     this.handleSearchType = this.handleSearchType.bind(this);
     this.handleSearchByName = this.handleSearchByName.bind(this);
-
+    this.handleBeerTypeSearch = this.handleBeerTypeSearch.bind(this);
   }
 
   getAllBreweries() {
-    const selectedBeer = this.props.match.params.id;
-    Axios.get(`http://localhost:3000/breweries/${selectedBeer}`)
+    const selectedBrewery = this.props.match.params.id;
+    Axios.get(`http://localhost:3000/breweries/${selectedBrewery}`)
       .then((response) => {
-        console.log("all beers of this brewery response: ", response.data);
+        console.log("all beers of this brewery: ", response.data);
+        const beers: Array<Beer> = response.data.beers;
+        const uniqueBeerTypes = getBeerType(beers);
         this.setState({
-          beers: response.data.beers,
-          shownBeers: response.data.beers,
-          loading: false
+          beers: beers,
+          shownBeers: beers,
+          loading: false,
+          types: uniqueBeerTypes,
         });
         console.log("this.state.beers", this.state.beers);
       })
@@ -68,15 +112,21 @@ export class BreweryDetail extends React.Component<Props, State> {
   handleSearchType(search: any) {
     this.setState({
       shownBeers: this.state.beers,
-    })
+    });
     let selectedSearch = search.target.value;
     this.setState({ searchType: selectedSearch });
   }
   handleSearchByName(name: string): void {
     this.setState({
       shownBeers: this.state.beers,
-    })
+    });
     const filteredBeers = filterBeersByName(this.state.beers, name);
+    this.setState({
+      shownBeers: filteredBeers,
+    });
+  }
+  handleBeerTypeSearch(name: string) {
+    const filteredBeers = filterBeersByType(this.state.beers, name);
     this.setState({
       shownBeers: filteredBeers,
     });
@@ -85,52 +135,62 @@ export class BreweryDetail extends React.Component<Props, State> {
   render() {
     let searchComponent = <div></div>;
     if (this.state.searchType === "name") {
-      searchComponent = <SearchByName handleSearch={this.handleSearchByName} placeholder="beer name"/>;
+      searchComponent = (
+        <SearchByName
+          handleSearch={this.handleSearchByName}
+          placeholder="beer name"
+        />
+      );
     } else if (this.state.searchType === "type") {
-      searchComponent = <div></div>
+      searchComponent = (
+        <SearchSelect
+          handleSearch={this.handleBeerTypeSearch}
+          options={this.state.types}
+        />
+      );
     }
 
     return (
       <div>
-        {this.state.loading && <h1>Loading...</h1>}
-        {!this.state.beers && !this.state.loading && <h1>No beers found</h1>}
-        {this.state.beers && !this.state.loading && (
-          <div>
-          <div className="hero-image">
+        <div className="hero-image">
           <div className="hero-text">
             <h1>All their beers</h1>
           </div>
         </div>
+        {this.state.loading && <h1>Loading...</h1>}
+        {!this.state.beers && !this.state.loading && <h1>No beers found</h1>}
+        {this.state.beers && !this.state.loading && (
           <div className="container">
-            <div className="search-header">
-            <div>
-              <h4 id="search-title">I want to </h4>
-              <select
-                name="search"
-                className="search-select"
-                onChange={(event) => this.handleSearchType(event)}
-              >
-                <option value="name" selected>
-                  search by Name
-                </option>
-                <option value="country">search by Country</option>
-              </select>
+            <div className="row">
+              <div className="col-sm-12 search">
+                <h4>I want to </h4>
+                <select
+                  name="search"
+                  className="search-select"
+                  onChange={(event) => this.handleSearchType(event)}
+                >
+                  <option value="name" selected>
+                    search by Name
+                  </option>
+                  <option value="type">search by Type</option>
+                </select>
+              </div>
             </div>
+
             {searchComponent}
-          </div>
+
             <div className="row">
               {this.state.shownBeers.map((beer: any) => (
-                <div className="col-sm-12">
-                <Link  to={`/beers/${beer.id}`} >
-                  <div key={beer.id}>
+                <div className="col-sm-12" key={beer.id}>
+                  {/* <Link  to={`/beers/${beer.id}`} > */}
+                  <div>
                     <h5>{beer.name}</h5>
-                    <p>Style: {beer.style.category.name}</p>
+                    <p>Type: {beer.style.name}</p>
                   </div>
-                </Link>
+                  {/* </Link> */}
                 </div>
               ))}
             </div>
-          </div>
           </div>
         )}
       </div>

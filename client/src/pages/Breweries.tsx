@@ -3,7 +3,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 import SearchByName from "../components/SearchByName";
-import SearchByCountry from "../components/SearchByCountry";
+import SearchSelect from "../components/SearchSelect";
 
 import "../styling/default.scss";
 
@@ -148,9 +148,9 @@ export class Breweries extends React.Component<Props, State> {
       );
     } else if (this.state.searchType === "country") {
       searchComponent = (
-        <SearchByCountry
+        <SearchSelect
           handleSearch={this.handleSearchByCountry}
-          countries={this.state.countries}
+          options={this.state.countries}
         />
       );
     }
@@ -158,13 +158,13 @@ export class Breweries extends React.Component<Props, State> {
       <div>
         <div className="hero-image">
           <div className="hero-text">
-            <h1>All our breweries</h1>
+            <h1>Our breweries</h1>
           </div>
         </div>
         <div className="container">
-          <div className="search-header">
-            <div>
-              <h4 id="search-title">I want to </h4>
+          <div className="row">
+            <div className="col-sm-12 search">
+              <h4>I want to </h4>
               <select
                 name="search"
                 className="search-select"
@@ -176,15 +176,16 @@ export class Breweries extends React.Component<Props, State> {
                 <option value="country">search by Country</option>
               </select>
             </div>
-            {searchComponent}
           </div>
-          <p>Click on a brewery to see which beers they produce</p>
+          {searchComponent}
+
+          <h5>Click on a brewery to see which beers they produce</h5>
           {this.state.shownBreweries.map((brewery) => (
             <div key={brewery.id}>
               <div className="row">
                 <div className="col-12">
                   <Link to={`/breweries/${brewery.id}`}>
-                    <h5>{brewery.name}</h5>
+                    <h4>{brewery.name}</h4>
                   </Link>
                   <p>{brewery.description}</p>
                 </div>

@@ -17,7 +17,6 @@ router.get('/beers', function(req, res, next) {
 });
 
 router.get('/beers/:id', function(req, res, next) {
-  console.log("XXXX", req.params)
   const selectedBrewery = req.params.id;
   Axios
   .get(`https://sandbox-api.brewerydb.com/v2/beer/${selectedBrewery}/?key=${process.env.APIKEY}`)

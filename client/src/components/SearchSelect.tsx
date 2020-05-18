@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   handleSearch: (name: string) => any;
-  countries: Array<string>;
+  options: Array<string>;
 }
 interface State {
   searchValue: any;
@@ -25,15 +25,17 @@ class SearchByCountry extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <select name="country" onChange={(event) => this.handleOnChange(event)}>
+      <div className="row">
+      <div className="col-sm-12 search-component">
+        <select name="dropDown" onChange={(event) => this.handleOnChange(event)}>
         <option value="" selected disabled>
-            Select country
+            Select
           </option>
-          {this.props.countries.map((country, index) => 
-            <option key={index} value={country}>{country}</option>
+          {this.props.options.map((item, index) => 
+            <option key={index} value={item}>{item}</option>
           )}
         </select>
+      </div>
       </div>
     );
   }

@@ -25,7 +25,7 @@ class SearchByName extends React.Component<Props, State> {
 
   render() {
     return (
-      <div>
+      <div className="col-sm-12 search-component">
         <input
           className="search-name"
           placeholder={this.props.placeholder}
