@@ -8,11 +8,13 @@ React | Typescript | ExpressJS | Bootstrap | CSS | HTML
 
 To run the application, you need to install the dependencies by running the following command:
 `npm install`
+
 Create a .env file and add your API key for the BreweryDB api:
 `APIKEY = yourKey`
+
 In the <b> client </b> project directory run:
 `npm start`
-Runs the app in the development mode.<br />
+
 In the <b> api </b> project directory run:
 `node ./bin/www`
 
