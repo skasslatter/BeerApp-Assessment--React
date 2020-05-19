@@ -1,12 +1,10 @@
 import React from "react";
 import Axios from "axios";
-// import { Link } from "react-router-dom";
 import _ from "lodash";
 import SearchByName from "../components/SearchByName";
 import SearchSelect from "../components/SearchSelect";
 
 import "../styling/default.scss";
-// import Beers from "./Beers";
 
 interface Props {
   match: any;
@@ -24,7 +22,7 @@ interface Beer {
   style: any;
 }
 
-function getBeerType(beers: Array<Beer>) {
+function getBeerTypes(beers: Array<Beer>) {
   const types = beers
     .filter((beer) => {
       return (
@@ -34,9 +32,7 @@ function getBeerType(beers: Array<Beer>) {
     .map((beer) => {
       return beer.style.shortName;
     });
-  console.log("types", types);
   const uniqueBeerTypes = _.uniq(types);
-  console.log("uniqueBeerTypes", uniqueBeerTypes);
   return uniqueBeerTypes;
 }
 
@@ -54,7 +50,6 @@ function filterBeersByType(beers: Array<Beer>, name: string) {
       let typeName = beer.style.shortName;
       return typeName === name;
     });
-  console.log("filteredBeers", filteredBeers);
   return filteredBeers;
 }
 
@@ -89,19 +84,19 @@ export class BreweryDetail extends React.Component<Props, State> {
       .then((response) => {
         console.log("all beers of this brewery: ", response.data);
         const beers: Array<Beer> = response.data.beers;
-        const uniqueBeerTypes = getBeerType(beers);
+        const uniqueBeerTypes = getBeerTypes(beers);
         this.setState({
           beers: beers,
           shownBeers: beers,
           loading: false,
           types: uniqueBeerTypes,
         });
-        console.log("this.state.beers", this.state.beers);
       })
       .catch((error) => {
-        console.log("error", error);
+        console.log("Error fetching beers for brewery", error);
       });
   }
+
   componentDidMount() {
     this.getAllBreweries();
   }
@@ -111,24 +106,26 @@ export class BreweryDetail extends React.Component<Props, State> {
     let selectedSearch = search.target.value;
     this.setState({
       shownBeers: this.state.beers,
-      searchType: selectedSearch,
+      searchType: selectedSearch
     });
   }
+
   handleSearchByName(name: string): void {
     const filteredBeers = filterBeersByName(this.state.beers, name);
     this.setState({
-      shownBeers: filteredBeers,
+      shownBeers: filteredBeers
     });
   }
+
   handleBeerTypeSearch(name: string) {
     const filteredBeers = filterBeersByType(this.state.beers, name);
     this.setState({
-      shownBeers: filteredBeers,
+      shownBeers: filteredBeers
     });
   }
 
   render() {
-    let searchComponent = <div></div>;
+    let searchComponent = null;
     if (this.state.searchType === "name") {
       searchComponent = (
         <SearchByName

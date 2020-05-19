@@ -1,13 +1,11 @@
 import React from "react";
-// import './App.css';
-
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
 import Homepage from "./pages/Homepage";
 import Beers from "./pages/Beers";
 import BeerDetail from "./pages/BeerDetail";
-
 import Breweries from "./pages/Breweries";
 import BreweryDetail from "./pages/BreweryDetail";
 

@@ -30,8 +30,6 @@ export class BeerDetail extends React.Component<Props, State> {
   }
 
   render() {
-    console.log("here", this.state.beer.style);
-
     return (
       <div>
         {!this.state.beer && <h1>Loading...</h1>}

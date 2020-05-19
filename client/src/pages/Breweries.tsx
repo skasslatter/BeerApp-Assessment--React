@@ -13,7 +13,7 @@ interface State {
   countries: Array<string>;
   shownBreweries: Array<Brewery>;
   selectedCountry?: string;
-  searchType?: string;
+  searchType: string;
   loading: boolean;
 }
 interface Brewery {
@@ -106,7 +106,7 @@ export class Breweries extends React.Component<Props, State> {
         });
       })
       .catch((error) => {
-        console.log("error2", error);
+        console.log("Failed to load breweries", error);
       });
   }
   componentDidMount() {
@@ -121,12 +121,14 @@ export class Breweries extends React.Component<Props, State> {
       shownBreweries: this.state.breweries,
     });
   }
+
   handleSearchByName(name: string): void {
     const filteredBreweries = filterBreweriesByName(this.state.breweries, name);
     this.setState({
       shownBreweries: filteredBreweries,
     });
   }
+
   handleSearchByCountry(name: string): void {
     const filteredBreweries = filterBreweriesByCountry(
       this.state.breweries,
@@ -138,7 +140,7 @@ export class Breweries extends React.Component<Props, State> {
   }
 
   render() {
-    let searchComponent = <div></div>;
+    let searchComponent = null;
     if (this.state.searchType === "name") {
       searchComponent = (
         <SearchByName
@@ -171,9 +173,7 @@ export class Breweries extends React.Component<Props, State> {
                 className="search-select"
                 onChange={(event) => this.handleSearchType(event)}
               >
-                <option value="name" selected>
-                  search by Name
-                </option>
+                <option value="name" selected>search by Name</option>
                 <option value="country">search by Country</option>
               </select>
             </div>

@@ -1,11 +1,11 @@
 import React from "react";
 
 interface Props {
-  handleSearch: (name: string) => any;
+  handleSearch: (name: string) => void;
   options: Array<string>;
 }
 interface State {
-  searchValue: any;
+  searchValue: string;
 }
 
 class SearchByCountry extends React.Component<Props, State> {
