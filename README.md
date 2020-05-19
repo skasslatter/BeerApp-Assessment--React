@@ -3,6 +3,7 @@
 <b>Used technologies:</b>
 
 React | Typescript | Lodash | ExpressJS | Bootstrap | CSS | HTML
+RestApi BreweryDB
 
 <b>Instructions:</b>
 
@@ -32,7 +33,10 @@ I decided to list all breweriest initially, and give the user the possibility to
 
 To make navigation easier I have added a navbar. The design of the site is fully responsive.
 <br/>
+
 <b>Challenges:</b>
+
+My first approach was to connect to the API directly from the frontend, which resulted in getting a CORS error. First a tried to find a workaround, but then I decided to built backend and call the API from there.
 
 ![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beers1_nufnyr.png)
 ![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beer2_mb7vxt.png)
