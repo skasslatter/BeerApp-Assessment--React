@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 // import './App.css';
 
 import { Switch, Route } from "react-router-dom";
@@ -11,13 +11,11 @@ import BeerDetail from "./pages/BeerDetail";
 import Breweries from "./pages/Breweries";
 import BreweryDetail from "./pages/BreweryDetail";
 
-
-
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Navbar/>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Homepage}></Route>
           <Route exact path="/beers" component={Beers}></Route>

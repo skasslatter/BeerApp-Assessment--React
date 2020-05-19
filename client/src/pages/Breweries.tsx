@@ -154,6 +154,7 @@ export class Breweries extends React.Component<Props, State> {
         />
       );
     }
+
     return (
       <div>
         <div className="hero-image">
@@ -178,7 +179,6 @@ export class Breweries extends React.Component<Props, State> {
             </div>
           </div>
           {searchComponent}
-
           <h5>Click on a brewery to see which beers they produce</h5>
           {this.state.loading && <h1>Loading 🍻🍻🍻</h1>}
           {this.state.shownBreweries.map((brewery) => (

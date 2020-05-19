@@ -109,10 +109,10 @@ export class BreweryDetail extends React.Component<Props, State> {
   //handles the drop down search menu
   handleSearchType(search: any) {
     let selectedSearch = search.target.value;
-    this.setState({ 
+    this.setState({
       shownBeers: this.state.beers,
-      searchType: selectedSearch
-     });
+      searchType: selectedSearch,
+    });
   }
   handleSearchByName(name: string): void {
     const filteredBeers = filterBeersByName(this.state.beers, name);

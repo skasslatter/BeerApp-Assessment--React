@@ -9,12 +9,11 @@ export class Homepage extends React.Component {
         <div className="caption">
           <h1>Welcome</h1>
           <div className="homepage-buttons">
-          {/* <Link to="/beers" className="homepage-button">
-            <button className="btn btn-warning">Check out our beers</button>
-          </Link> */}
-          <Link to="/breweries">
-            <button className="btn btn-warning">Check out our breweries</button>
-          </Link>
+            <Link to="/breweries">
+              <button className="btn btn-warning">
+                Check out our breweries
+              </button>
+            </Link>
           </div>
         </div>
       </div>

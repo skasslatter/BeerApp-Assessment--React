@@ -2,7 +2,7 @@ import React from "react";
 
 interface Props {
   handleSearch: (name: string) => void;
-  placeholder: string
+  placeholder: string;
 }
 interface State {
   searchValue: string;

@@ -9,19 +9,25 @@
 h1 {
   margin-top: 200px;
   text-align: center;
-  font-size: 3em!important;
+  font-size: 3em !important;
 }
 
 h4 {
   margin: 2vh;
-  color: burlywood;
+  color: goldenrod;
   font-weight: 600;
   font-size: x-large;
 }
 
 h5 {
-  margin: 2vh;
+  margin: 3vh !important;
   text-align: center;
   font-size: initial;
   font-style: italic;
+  font-size: medium;
+}
+
+.btn-warning {
+  color: blanchedalmond !important;
+  background-color: goldenrod !important;
 }

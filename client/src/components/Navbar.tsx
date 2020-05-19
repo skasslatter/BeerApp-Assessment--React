@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
-import "../styling/default.scss"
+import "../styling/default.scss";
 
 export default class Navigation extends React.Component {
   render() {
@@ -14,7 +14,6 @@ export default class Navigation extends React.Component {
               <Nav.Link href="/">Home</Nav.Link>
               {/* <Nav.Link href="/beers">All Beers</Nav.Link> */}
               <Nav.Link href="/breweries">All Breweries</Nav.Link>
-
             </Nav>
           </Navbar.Collapse>
         </Navbar>

@@ -1,12 +1,15 @@
 .navbar {
-  background-color: #E1A800;
+  background-color: goldenrod;
 }
 
 .navbar-brand {
-  color: white!important;
+  color: white !important;
   font-size: xxx-large;
-  // margin-left: 2vh;
-  padding-top: 0em!important;
-  padding-bottom: 0em!important;
-  font-size: 3.25rem!important;
+  padding-top: 0em !important;
+  padding-bottom: 0em !important;
+  font-size: 3.25rem !important;
+}
+
+.nav-link {
+  color: blanchedalmond !important;
 }

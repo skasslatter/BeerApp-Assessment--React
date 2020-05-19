@@ -26,29 +26,24 @@ class SearchByCountry extends React.Component<Props, State> {
   render() {
     return (
       <div className="row">
-      <div className="col-sm-12 search-component">
-        <select name="dropDown" onChange={(event) => this.handleOnChange(event)}>
-        <option value="" selected disabled>
-            Select
-          </option>
-          {this.props.options.map((item, index) => 
-            <option key={index} value={item}>{item}</option>
-          )}
-        </select>
-      </div>
+        <div className="col-sm-12 search-component">
+          <select
+            name="dropDown"
+            onChange={(event) => this.handleOnChange(event)}
+          >
+            <option value="" selected disabled>
+              Select
+            </option>
+            {this.props.options.map((item, index) => (
+              <option key={index} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
     );
   }
 }
 
 export default SearchByCountry;
-
-{
-  /* <input
-          className="search-name"
-          placeholder="Search a country..."
-          type="text"
-          name="text"
-          onChange={(event) => this.handleOnChange(event)}
-        /> */
-}
