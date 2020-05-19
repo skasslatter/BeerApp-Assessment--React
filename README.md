@@ -3,6 +3,7 @@
 <b>Used technologies:</b>
 
 React | Typescript | Lodash | ExpressJS | Bootstrap | CSS | HTML
+
 RestApi BreweryDB
 
 <b>Instructions:</b>
