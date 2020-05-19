@@ -2,7 +2,7 @@
 
 <b>Used technologies:</b>
 
-React | Typescript | ExpressJS | Bootstrap | CSS | HTML
+React | Typescript | Lodash | ExpressJS | Bootstrap | CSS | HTML
 
 <b>Instructions:</b>
 
@@ -22,6 +22,13 @@ Open [http://localhost:3000](http://localhost:3001) to view it in the browser.
 The page will reload if you make edits.
 
 <br/>
+
+<b>Content:</b>
+For this assessment I connected to the BreweryDB API. My task was to list breweries
+per country, provide a search field for them by name and filter/group them by country and by
+type. I decided to list all breweriest initially, and give the user the possibility to filter by country or by brewery name. Additionally if the user clicks on a specific brewery, he will be able to see all the beers produced by said brewery and will also have the possibility to filter them bu name and beer type. 
+
+To make navigation easier I have added a navbar. The design of the site is fully responsive.
 
 ![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beers1_nufnyr.png)
 ![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beer2_mb7vxt.png)
