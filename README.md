@@ -18,7 +18,7 @@ In the <b> client </b> project directory run:
 `npm start`
 
 In the <b> api </b> project directory run:
-`node ./bin/www`
+`node start`
 
 Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 The page will reload if you make edits.

@@ -96,7 +96,7 @@ export class Breweries extends React.Component<Props, State> {
     Axios.get("http://localhost:3000/breweries")
       .then((response) => {
         console.log("all breweries response: ", response);
-        const breweries: Array<Brewery> = response.data.beers;
+        const breweries: Array<Brewery> = response.data.breweries;
         const uniqueCountryNames = getCountryNames(breweries);
         this.setState({
           breweries: breweries,

@@ -85,7 +85,7 @@ export class BreweryDetail extends React.Component<Props, State> {
 
   getAllBreweries() {
     const selectedBrewery = this.props.match.params.id;
-    Axios.get(`http://localhost:3000/breweries/${selectedBrewery}`)
+    Axios.get(`http://localhost:3000/breweries/${selectedBrewery}/beers`)
       .then((response) => {
         console.log("all beers of this brewery: ", response.data);
         const beers: Array<Beer> = response.data.beers;

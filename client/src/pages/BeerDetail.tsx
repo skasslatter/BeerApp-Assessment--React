@@ -22,7 +22,7 @@ export class BeerDetail extends React.Component<Props, State> {
     Axios.get(`http://localhost:3000/beers/${selectedBeer}`)
       .then((response) => {
         console.log("one beer response: ", response);
-        this.setState({ beer: response.data.beers });
+        this.setState({ beer: response.data.beer });
       })
       .catch((error) => {
         console.log(error);
