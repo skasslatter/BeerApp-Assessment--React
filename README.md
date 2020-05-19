@@ -1,16 +1,15 @@
 # PXL-Programming-Assessment
 
 <b>Used technologies:</b>
+
 React | Typescript | ExpressJS | Bootstrap | CSS | HTML
 
 <b>Instructions:</b>
 
 To run the application, you need to install the dependencies by running the following command:
 `npm install`
-
 Create a .env file and add your API key for the BreweryDB api:
 `APIKEY = yourKey`
-
 In the <b> client </b> project directory run:
 `npm start`
 Runs the app in the development mode.<br />
