@@ -58,9 +58,11 @@ function filterBreweriesByCountry(
       return brewery.locations !== null && brewery.locations !== undefined;
     })
     .filter((brewery) => {
+      //brewery has multiple locations
       const validLocations = brewery.locations.filter((location) => {
         return location.country.displayName === countryName;
       });
+      //return true/false
       return validLocations.length > 0;
     });
   return filteredBreweries;
@@ -109,6 +111,7 @@ export class Breweries extends React.Component<Props, State> {
         console.log("Failed to load breweries", error);
       });
   }
+
   componentDidMount() {
     this.getAllBreweries();
   }
@@ -169,18 +172,19 @@ export class Breweries extends React.Component<Props, State> {
             <div className="col-sm-12 search">
               <h4>I want to </h4>
               <select
+                defaultValue="name"
                 name="search"
                 className="search-select"
                 onChange={(event) => this.handleSearchType(event)}
               >
-                <option value="name" selected>search by Name</option>
+                <option value="name">search by Name</option>
                 <option value="country">search by Country</option>
               </select>
             </div>
           </div>
           {searchComponent}
           <h5>Click on a brewery to see which beers they produce</h5>
-          {this.state.loading && <h1>Loading 🍻🍻🍻</h1>}
+          {this.state.loading && <h1>Loading <span role="img" aria-label="beers">🍻🍻🍻</span></h1>}
           {this.state.shownBreweries.map((brewery) => (
             <div key={brewery.id} className="list-item">
               <div className="row">

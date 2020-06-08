@@ -7,7 +7,7 @@ export default class Navigation extends React.Component {
     return (
       <div>
         <Navbar expand="lg">
-          <Navbar.Brand href="/">🍻</Navbar.Brand>
+          <Navbar.Brand href="/"><span role="img" aria-label="beers">🍻</span></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">

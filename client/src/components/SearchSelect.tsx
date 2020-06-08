@@ -28,10 +28,11 @@ class SearchByCountry extends React.Component<Props, State> {
       <div className="row">
         <div className="col-sm-12 search-component">
           <select
+            defaultValue=""
             name="dropDown"
             onChange={(event) => this.handleOnChange(event)}
           >
-            <option value="" selected disabled>
+            <option value="" disabled>
               Select
             </option>
             {this.props.options.map((item, index) => (

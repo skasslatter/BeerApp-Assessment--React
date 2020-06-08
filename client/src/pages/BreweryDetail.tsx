@@ -72,13 +72,13 @@ export class BreweryDetail extends React.Component<Props, State> {
       loading: true,
       types: [],
     };
-    this.getAllBreweries = this.getAllBreweries.bind(this);
+    this.getAllBreweryBeers = this.getAllBreweryBeers.bind(this);
     this.handleSearchType = this.handleSearchType.bind(this);
     this.handleSearchByName = this.handleSearchByName.bind(this);
     this.handleBeerTypeSearch = this.handleBeerTypeSearch.bind(this);
   }
 
-  getAllBreweries() {
+  getAllBreweryBeers() {
     const selectedBrewery = this.props.match.params.id;
     Axios.get(`http://localhost:3000/breweries/${selectedBrewery}/beers`)
       .then((response) => {
@@ -98,7 +98,7 @@ export class BreweryDetail extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    this.getAllBreweries();
+    this.getAllBreweryBeers();
   }
 
   //handles the drop down search menu
@@ -106,21 +106,21 @@ export class BreweryDetail extends React.Component<Props, State> {
     let selectedSearch = search.target.value;
     this.setState({
       shownBeers: this.state.beers,
-      searchType: selectedSearch
+      searchType: selectedSearch,
     });
   }
 
   handleSearchByName(name: string): void {
     const filteredBeers = filterBeersByName(this.state.beers, name);
     this.setState({
-      shownBeers: filteredBeers
+      shownBeers: filteredBeers,
     });
   }
 
   handleBeerTypeSearch(name: string) {
     const filteredBeers = filterBeersByType(this.state.beers, name);
     this.setState({
-      shownBeers: filteredBeers
+      shownBeers: filteredBeers,
     });
   }
 
@@ -149,7 +149,7 @@ export class BreweryDetail extends React.Component<Props, State> {
             <h1>Their beers</h1>
           </div>
         </div>
-        {this.state.loading && <h1>Loading 🍻🍻🍻</h1>}
+        {this.state.loading && <h1>Loading <span role="img" aria-label="beers">🍻🍻🍻</span></h1>}
         {!this.state.beers && !this.state.loading && <h1>No beers found</h1>}
         {this.state.beers && !this.state.loading && (
           <div className="container">
@@ -157,13 +157,12 @@ export class BreweryDetail extends React.Component<Props, State> {
               <div className="col-sm-12 search">
                 <h4>I want to </h4>
                 <select
+                  defaultValue="name"
                   name="search"
                   className="search-select"
                   onChange={(event) => this.handleSearchType(event)}
                 >
-                  <option value="name" selected>
-                    search by Name
-                  </option>
+                  <option value="name">search by Name</option>
                   <option value="type">search by Type</option>
                 </select>
               </div>
@@ -180,7 +179,7 @@ export class BreweryDetail extends React.Component<Props, State> {
                     <p>Type: {beer.style.name}</p>
                     {beer.labels && (
                       <div className="beer-img">
-                        <img src={beer.labels.medium} />
+                        <img src={beer.labels.medium} alt="BeerImage"/>
                       </div>
                     )}
                   </div>
