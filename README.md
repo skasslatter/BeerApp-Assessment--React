@@ -41,6 +41,6 @@ To make navigation easier I have added a navbar. The design of the site is fully
 My first approach was to connect to the API directly from the frontend, which resulted in getting a CORS error. First I tried to find a workaround, but then I found out that, according to the API documentation, the API can not be used directly from the frontend. So I decided to build a backend and call the API from there.
 
 ![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/pxl/beers1_nufnyr.png)
-![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beer2_mb7vxt.png)
-![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589902949/screenshots/beer4_lna3xm.png)
-![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/beer3_gtfhpk.png)
+![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/pxl/beer2_mb7vxt.png)
+![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589902949/screenshots/pxl/beer4_lna3xm.png)
+![alt text](https://res.cloudinary.com/dwnm4mxrr/image/upload/v1589896192/screenshots/pxl/beer3_gtfhpk.png)
